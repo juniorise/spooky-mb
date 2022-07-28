@@ -9,7 +9,6 @@ import 'package:spooky/views/detail/detail_view.dart';
 import 'package:spooky/views/detail/detail_view_model.dart';
 import 'package:spooky/views/detail/local_widgets/detail_insert_page_button.dart';
 import 'package:spooky/views/detail/local_widgets/detail_sheet.dart';
-import 'package:spooky/views/detail/local_widgets/detail_title.dart';
 import 'package:spooky/views/detail/local_widgets/page_indicator_button.dart';
 import 'package:spooky/views/detail/local_widgets/story_tags.dart';
 import 'package:spooky/widgets/sp_animated_icon.dart';
@@ -104,10 +103,8 @@ class _DetailScaffoldState extends State<DetailScaffold>
     return MorphingAppBar(
       backgroundColor: M3Color.of(context).background,
       heroTag: DetailView.appBarHeroKey,
-      titleSpacing: 8.0,
       elevation: 0,
       leading: buildLeading(),
-      title: buildTitle(),
       flexibleSpace: buildFlexibleSpace(),
       actions: [
         DetailInsertPageButton(widget: widget, buildSheetVisibilityBuilder: buildSheetVisibilityBuilder),
@@ -160,29 +157,6 @@ class _DetailScaffoldState extends State<DetailScaffold>
           );
         },
       ),
-    );
-  }
-
-  Widget buildTitle() {
-    return buildSheetVisibilityBuilder(
-      child: DetailTitle(
-        widget: widget,
-        context: context,
-      ),
-      builder: (context, isOpen, child) {
-        return IgnorePointer(
-          ignoring: isOpen,
-          child: SpCrossFade(
-            showFirst: !isOpen,
-            duration: ConfigConstant.fadeDuration,
-            alignment: Alignment.topLeft,
-            secondChild: const SizedBox(width: double.infinity),
-            firstChild: Wrap(
-              children: [child!],
-            ),
-          ),
-        );
-      },
     );
   }
 
